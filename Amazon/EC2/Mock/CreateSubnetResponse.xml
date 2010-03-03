@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CreateSubnetResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+  <CreateSubnetResult>
+    <Subnet>
+      <SubnetId>string</SubnetId>
+      <SubnetState>string</SubnetState>
+      <VpcId>string</VpcId>
+      <CidrBlock>string</CidrBlock>
+      <AvailableIpAddressCount>100</AvailableIpAddressCount>
+      <AvailabilityZone>string</AvailabilityZone>
+    </Subnet>
+  </CreateSubnetResult>
+</CreateSubnetResponse>

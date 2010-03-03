@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DescribeSpotPriceHistoryResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+  <DescribeSpotPriceHistoryResult>
+    <!--1 or more repetitions:-->
+    <SpotPriceHistory>
+      <InstanceType>string</InstanceType>
+      <ProductDescription>string</ProductDescription>
+      <SpotPrice>string</SpotPrice>
+      <Timestamp>string</Timestamp>
+    </SpotPriceHistory>
+  </DescribeSpotPriceHistoryResult>
+</DescribeSpotPriceHistoryResponse>

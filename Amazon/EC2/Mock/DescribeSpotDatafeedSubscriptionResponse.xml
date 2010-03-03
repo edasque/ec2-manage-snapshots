@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DescribeSpotDatafeedSubscriptionResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+  <DescribeSpotDatafeedSubscriptionResult>
+    <SpotDatafeedSubscription>
+      <OwnerId>string</OwnerId>
+      <Bucket>string</Bucket>
+      <Prefix>string</Prefix>
+      <State>string</State>
+      <!--Optional:-->
+      <Fault>
+        <Code>string</Code>
+        <Message>string</Message>
+      </Fault>
+    </SpotDatafeedSubscription>
+  </DescribeSpotDatafeedSubscriptionResult>
+</DescribeSpotDatafeedSubscriptionResponse>

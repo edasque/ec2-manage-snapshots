@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DescribeBundleTasksResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+  <DescribeBundleTasksResult>
+    <!--Zero or more repetitions:-->
+    <BundleTask>
+      <InstanceId>string</InstanceId>
+      <BundleId>string</BundleId>
+      <BundleState>string</BundleState>
+      <StartTime>string</StartTime>
+      <UpdateTime>string</UpdateTime>
+      <Storage>
+        <S3>
+          <Bucket>string</Bucket>
+          <Prefix>string</Prefix>
+          <!--Optional:-->
+          <AWSAccessKeyId>string</AWSAccessKeyId>
+          <!--Optional:-->
+          <UploadPolicy>string</UploadPolicy>
+          <!--Optional:-->
+          <UploadPolicySignature>string</UploadPolicySignature>
+        </S3>
+      </Storage>
+      <!--Optional:-->
+      <Progress>string</Progress>
+      <!--Optional:-->
+      <BundleTaskError>
+        <Code>string</Code>
+        <Message>string</Message>
+      </BundleTaskError>
+    </BundleTask>
+  </DescribeBundleTasksResult>
+</DescribeBundleTasksResponse>

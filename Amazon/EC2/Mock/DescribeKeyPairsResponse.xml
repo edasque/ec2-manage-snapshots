@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DescribeKeyPairsResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+  <DescribeKeyPairsResult>
+    <!--1 or more repetitions:-->
+    <KeyPair>
+      <KeyName>string</KeyName>
+      <KeyFingerprint>string</KeyFingerprint>
+      <!--Optional:-->
+      <KeyMaterial>string</KeyMaterial>
+    </KeyPair>
+  </DescribeKeyPairsResult>
+</DescribeKeyPairsResponse>

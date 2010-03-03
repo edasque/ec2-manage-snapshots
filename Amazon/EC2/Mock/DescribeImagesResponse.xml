@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DescribeImagesResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+  <DescribeImagesResult>
+    <!--1 or more repetitions:-->
+    <Image>
+      <ImageId>string</ImageId>
+      <!--Optional:-->
+      <ImageLocation>string</ImageLocation>
+      <ImageState>string</ImageState>
+      <OwnerId>string</OwnerId>
+      <Visibility>string</Visibility>
+      <!--Zero or more repetitions:-->
+      <ProductCode>string</ProductCode>
+      <!--Optional:-->
+      <Architecture>string</Architecture>
+      <!--Optional:-->
+      <ImageType>string</ImageType>
+      <!--Optional:-->
+      <KernelId>string</KernelId>
+      <!--Optional:-->
+      <RamdiskId>string</RamdiskId>
+      <!--Optional:-->
+      <Platform>string</Platform>
+      <!--Optional:-->
+      <StateReason>
+        <Code>string</Code>
+        <Message>string</Message>
+      </StateReason>
+      <!--Optional:-->
+      <ImageOwnerAlias>string</ImageOwnerAlias>
+      <!--Optional:-->
+      <Name>string</Name>
+      <!--Optional:-->
+      <Description>string</Description>
+      <!--Optional:-->
+      <RootDeviceType>string</RootDeviceType>
+      <!--Optional:-->
+      <RootDeviceName>string</RootDeviceName>
+      <!--Zero or more repetitions:-->
+      <BlockDeviceMapping>
+        <DeviceName>string</DeviceName>
+        <VirtualName>string</VirtualName>
+        <Ebs>
+          <!--Optional:-->
+          <SnapshotId>string</SnapshotId>
+          <!--Optional:-->
+          <VolumeSize>3</VolumeSize>
+          <!--Optional:-->
+          <DeleteOnTermination>false</DeleteOnTermination>
+        </Ebs>
+        <NoDevice>string</NoDevice>
+      </BlockDeviceMapping>
+    </Image>
+  </DescribeImagesResult>
+</DescribeImagesResponse>

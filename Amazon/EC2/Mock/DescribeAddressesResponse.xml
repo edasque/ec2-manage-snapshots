@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DescribeAddressesResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+  <DescribeAddressesResult>
+    <!--1 or more repetitions:-->
+    <Address>
+      <InstanceId>string</InstanceId>
+      <PublicIp>string</PublicIp>
+    </Address>
+  </DescribeAddressesResult>
+</DescribeAddressesResponse>

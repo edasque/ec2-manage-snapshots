@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DescribeReservedInstancesOfferingsResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+  <DescribeReservedInstancesOfferingsResult>
+    <!--1 or more repetitions:-->
+    <ReservedInstancesOffering>
+      <ReservedInstancesOfferingId>string</ReservedInstancesOfferingId>
+      <!--Optional:-->
+      <InstanceType>string</InstanceType>
+      <!--Optional:-->
+      <AvailabilityZone>string</AvailabilityZone>
+      <!--Optional:-->
+      <Duration>3</Duration>
+      <!--Optional:-->
+      <UsagePrice>string</UsagePrice>
+      <!--Optional:-->
+      <FixedPrice>string</FixedPrice>
+      <!--Optional:-->
+      <ProductDescription>string</ProductDescription>
+    </ReservedInstancesOffering>
+  </DescribeReservedInstancesOfferingsResult>
+</DescribeReservedInstancesOfferingsResponse>

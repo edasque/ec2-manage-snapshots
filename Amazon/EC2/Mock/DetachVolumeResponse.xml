@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DetachVolumeResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <!--Optional:-->
+  <DetachVolumeResult>
+    <Attachment>
+      <VolumeId>string</VolumeId>
+      <InstanceId>string</InstanceId>
+      <Device>string</Device>
+      <Status>string</Status>
+      <AttachTime>string</AttachTime>
+      <DeleteOnTermination>false</DeleteOnTermination>
+    </Attachment>
+  </DetachVolumeResult>
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+</DetachVolumeResponse>

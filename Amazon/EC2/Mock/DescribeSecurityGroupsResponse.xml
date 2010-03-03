@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DescribeSecurityGroupsResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+  <DescribeSecurityGroupsResult>
+    <!--1 or more repetitions:-->
+    <SecurityGroup>
+      <OwnerId>string</OwnerId>
+      <GroupName>string</GroupName>
+      <GroupDescription>string</GroupDescription>
+      <!--1 or more repetitions:-->
+      <IpPermission>
+        <IpProtocol>string</IpProtocol>
+        <FromPort>3</FromPort>
+        <ToPort>3</ToPort>
+        <!--1 or more repetitions:-->
+        <UserIdGroupPair>
+          <UserId>string</UserId>
+          <GroupName>string</GroupName>
+        </UserIdGroupPair>
+        <!--1 or more repetitions:-->
+        <IpRange>string</IpRange>
+      </IpPermission>
+    </SecurityGroup>
+  </DescribeSecurityGroupsResult>
+</DescribeSecurityGroupsResponse>

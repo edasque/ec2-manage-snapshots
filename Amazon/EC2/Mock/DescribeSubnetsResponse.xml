@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DescribeSubnetsResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+  <DescribeSubnetsResult>
+    <!--1 or more repetitions:-->
+    <Subnet>
+      <SubnetId>string</SubnetId>
+      <SubnetState>string</SubnetState>
+      <VpcId>string</VpcId>
+      <CidrBlock>string</CidrBlock>
+      <AvailableIpAddressCount>100</AvailableIpAddressCount>
+      <AvailabilityZone>string</AvailabilityZone>
+    </Subnet>
+  </DescribeSubnetsResult>
+</DescribeSubnetsResponse>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DescribeVolumesResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <!--Optional:-->
+  <DescribeVolumesResult>
+    <!--1 or more repetitions:-->
+    <Volume>
+      <VolumeId>string</VolumeId>
+      <Size>string</Size>
+      <SnapshotId>string</SnapshotId>
+      <AvailabilityZone>string</AvailabilityZone>
+      <Status>string</Status>
+      <CreateTime>string</CreateTime>
+      <!--1 or more repetitions:-->
+      <Attachment>
+        <VolumeId>string</VolumeId>
+        <InstanceId>string</InstanceId>
+        <Device>string</Device>
+        <Status>string</Status>
+        <AttachTime>string</AttachTime>
+        <DeleteOnTermination>false</DeleteOnTermination>
+      </Attachment>
+    </Volume>
+  </DescribeVolumesResult>
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+</DescribeVolumesResponse>

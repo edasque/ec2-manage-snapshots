@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DescribeRegionsResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+  <DescribeRegionsResult>
+    <!--1 or more repetitions:-->
+    <Region>
+      <RegionName>string</RegionName>
+      <Endpoint>string</Endpoint>
+    </Region>
+  </DescribeRegionsResult>
+</DescribeRegionsResponse>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DeleteVpcResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+</DeleteVpcResponse>

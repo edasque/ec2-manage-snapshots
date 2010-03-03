@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DescribeDhcpOptionsResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+  <DescribeDhcpOptionsResult>
+    <!--1 or more repetitions:-->
+    <DhcpOptions>
+      <DhcpOptionsId>string</DhcpOptionsId>
+      <!--1 or more repetitions:-->
+      <Configuration>
+        <Key>string</Key>
+        <!--1 or more repetitions:-->
+        <Value>string</Value>
+      </Configuration>
+    </DhcpOptions>
+  </DescribeDhcpOptionsResult>
+</DescribeDhcpOptionsResponse>

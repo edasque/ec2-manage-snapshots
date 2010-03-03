@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CreateVpnConnectionResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+  <CreateVpnConnectionResult>
+    <VpnConnection>
+      <VpnConnectionId>string</VpnConnectionId>
+      <VpnConnectionState>string</VpnConnectionState>
+      <CustomerGatewayConfiguration>string</CustomerGatewayConfiguration>
+      <Type>string</Type>
+      <CustomerGatewayId>string</CustomerGatewayId>
+      <VpnGatewayId>string</VpnGatewayId>
+    </VpnConnection>
+  </CreateVpnConnectionResult>
+</CreateVpnConnectionResponse>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DescribeSnapshotsResponse xmlns="http://ec2.amazonaws.com/doc/2009-11-30/">
+  <!--Optional:-->
+  <DescribeSnapshotsResult>
+    <!--1 or more repetitions:-->
+    <Snapshot>
+      <SnapshotId>string</SnapshotId>
+      <VolumeId>string</VolumeId>
+      <Status>string</Status>
+      <StartTime>string</StartTime>
+      <Progress>string</Progress>
+      <OwnerId>string</OwnerId>
+      <VolumeSize>string</VolumeSize>
+      <!--Optional:-->
+      <Description>string</Description>
+      <!--Optional:-->
+      <OwnerAlias>string</OwnerAlias>
+    </Snapshot>
+  </DescribeSnapshotsResult>
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+</DescribeSnapshotsResponse>
