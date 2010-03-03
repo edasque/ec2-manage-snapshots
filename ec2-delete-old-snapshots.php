@@ -1,4 +1,17 @@
 <?php
+/**
+ * Modified from code by:
+ *
+ * New region and no-op code from:
+ * @author Erik Dasque
+ * @version 0.7
+ * @copyright Erik Dasque, 3 March, 2010
+ * @package default
+ **/
+
+/**
+ * Define DocBlock
+ **/
 
 // Your EC2 credentials
 
