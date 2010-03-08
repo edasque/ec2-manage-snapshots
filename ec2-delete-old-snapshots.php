@@ -1,7 +1,8 @@
 <?php
 /**
  * Modified from code by:
- *
+ * Oren Solomianik’s
+ * http://orensol.com/2009/02/12/how-to-delete-those-old-ec2-ebs-snapshots/
  * New region and no-op code from
  * @author Erik Dasque
  * @version 0.7

@@ -9,24 +9,21 @@
  * @package default
  **/
 
-/**
- * Define DocBlock
- **/
-
 // Your EC2 credentials
-
 define('AWS_ACCESS_KEY_ID', 'AKIAIMQDJK3HJA6I4VYA');
 define('AWS_SECRET_ACCESS_KEY', 'Um5L7z8l5N/EqsmV1c2eVp8/ekWFyPyh5SyYwM7w'); 
 
-define ('SYNTAX','Usage: php ec2-delete-old-snapshots.php -v vol-id [-v vol-id ...] -o days [--region region] [--noop]\n\n');
+define ('SYNTAX','Usage: php ec2-delete-old-snapshots.php -v vol-id [-v vol-id ...] [--noop]\n\n');
 
-define("NOOP", "1");
+// uncomment the next line and comment the one after so the application is always in NO-OP mode (no delete)
+//define("NOOP", "1");
+define("NOOP", "0");
 
 date_default_timezone_set('UTC');
 
 // parse options (vol-ids, older-than)
 
-$opts = getopt("v:o:",array("region:","noop"));
+$opts = getopt("v:",array("region:","noop"));
 
 
 if  (($opts['v']) && !is_array($opts['v']))
@@ -50,21 +47,13 @@ else { echo "No region specified, defaulting to us-east-1\n"; $region = "us-east
 
 $ServiceURL = "https://".$region.".ec2.amazonaws.com";
 
-	
-if (!is_array($opts['o']))
-{
-	$now = time();
-	$days = $opts['o'];
-	$older_than = $now - $days * 24 * 60 * 60;
-}
-
-if ((!$volumes) || (!$older_than))
-	die("\n\nDid not provide vol-id or older-than-time.\n".SYNTAX);
+if ((!$volumes))
+	die("\n\nDid not provide vol-id.\n".SYNTAX);
 
 echo "\n";
 foreach ($volumes as $volume)
 {
-	echo "Will try to bulk delete for " . $volume ." in region ".$region." older than " . date("Y/m/d H:i:s", $older_than) . "\n";
+	echo "Will try to bulk delete for " . $volume ." in region ".$region."\n";
 }
 echo "\n";
 	
@@ -125,6 +114,9 @@ $response = $service->describeSnapshots($request);
 $result = $response->getDescribeSnapshotsResult();
 $snaps = $result->getSnapshot();
 
+$now = time();
+$older_than = $now - 7 * 24 * 60 * 60;
+
 if (is_array($snaps))
 {
 	// first check we have at least 1 newer snapshot for every vol-id we got
@@ -162,13 +154,17 @@ if (is_array($snaps))
 	foreach ($snaps as $snap)
 	{
 		$snapTimestamp = strtotime($snap->getStartTime());
-		if ( (in_array($snap->getVolumeId(), $go_ahead_volumes)) && ($snapTimestamp < $older_than) )
+		if ( (in_array($snap->getVolumeId(), $go_ahead_volumes)) )
 		{
-			echo "Deleting volume " . $snap->getVolumeId() . " snapshot " . $snap->getSnapshotId() . " created on: " . date('m/d/y \a\t H:i:s e',strtotime($snap->getStartTime())) ."\n";
-			// and now really delete using EC2 library
-			$request = new Amazon_EC2_Model_DeleteSnapshotRequest();
-			$request->setSnapshotId($snap->getSnapshotId());
-			if ($dodelete) $response = $service->deleteSnapshot($request);
+			
+			
+			if (!keepSnapShot($snap->getStartTime())) {			
+				echo "Deleting volume " . $snap->getVolumeId() . " snapshot " . $snap->getSnapshotId() . " created on: " . date('m/d/y \a\t H:i:s e',strtotime($snap->getStartTime())) ."\n";
+				// and now really delete using EC2 library
+				$request = new Amazon_EC2_Model_DeleteSnapshotRequest();
+				$request->setSnapshotId($snap->getSnapshotId());
+				if ($dodelete) $response = $service->deleteSnapshot($request);
+			}
 			    
 		}
 	}
@@ -178,3 +174,50 @@ else
 {
 	die ("\n\nNo snapshots found, quitting.\n\n");
 }
+
+/**
+ * Define DocBlock
+ **/
+function  keepSnapShot($creation_date)
+{
+	$now = time();
+	$older_than = $now - 7 * 24 * 60 * 60;
+	$older_than_month = $now - 30 * 24 * 60 * 60;
+	
+	
+	// echo strtotime($creation_date);
+	$ts = strtotime($creation_date);
+	
+//	echo 'Day of month: '.date("d",$ts)."\n";
+//	echo 'Day of week: '.date("w",$ts)."\n";
+	
+	echo date('M d, Y',$ts)."\t";
+	
+	if ($ts>=$older_than) { 
+		echo "Recent backup\tKEEP\n" ;
+		return(TRUE); 
+		} 
+	if (date("d",$ts)==1) { 
+		echo "1st of month\tKEEP\n" ; 
+		return(TRUE); 
+		}
+	if ((date("w",$ts)==0) && $ts>$older_than_month) { 
+		echo "Recent Sunday\tKEEP\n" ;
+		return(TRUE); 
+		} 
+	if ((date("w",$ts)==0) && $ts<=$older_than_month) { 
+		echo "Old Sunday\tDELETE\n" ;
+		return(FALSE); 
+		} 
+	if ($ts<$older_than) { 
+		echo "Old backup\tDELETE\n" ; 
+		return(FALSE); 
+		} 
+		
+	
+	echo "Unknown condition on ".date('F d, Y',$ts)."\n"; exit(0);
+	return(FALSE); 
+}
+
+
+?>
