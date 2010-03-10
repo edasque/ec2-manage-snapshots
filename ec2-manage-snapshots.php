@@ -1,28 +1,33 @@
 <?php
 /**
  * Modified from code by:
- *
- * New region and no-op code from:
+ * Oren Solomianik’s
+ * http://orensol.com/2009/02/12/how-to-delete-those-old-ec2-ebs-snapshots/
+ * New region, snapshots managed as incremental backups and no-op code from:
  * @author Erik Dasque
- * @version 0.7
- * @copyright Erik Dasque, 3 March, 2010
+ * @version 0.8
+ * @copyright Erik Dasque, 8 March, 2010
  * @package default
+ * WARNING : USE AT YOU OWN RISK!!! This application will delete snapshots unless you use the --noop option
  **/
 
 // Your EC2 credentials
-define('AWS_ACCESS_KEY_ID', ''); 
-define('AWS_SECRET_ACCESS_KEY', '');
+$AWS_ACCESS_KEY_ID = '';
+$AWS_SECRET_ACCESS_KEY='';
 
-define('AWS_ACCESS_KEY_ID', 'AKIAIMQDJK3HJA6I4VYA');
-define('AWS_SECRET_ACCESS_KEY', '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'); 
-
-define ('SYNTAX','Usage: php ec2-delete-old-snapshots.php -v vol-id [-v vol-id ...] [--noop]\n\n');
+define ('SYNTAX','Usage: php ec2-manage-snapshots.php -v vol-id [-v vol-id ...] [--noop]\n\n');
 
 // uncomment the next line and comment the one after so the application is always in NO-OP mode (no delete)
 //define("NOOP", "1");
 define("NOOP", "0");
 
 date_default_timezone_set('UTC');
+
+if ((empty($AWS_ACCESS_KEY_ID) ) && (!(strlen(getenv('AWS_ACCESS_KEY_ID'))==0)))
+{ $AWS_ACCESS_KEY_ID=getenv('AWS_ACCESS_KEY_ID'); }
+
+if ((empty($AWS_SECRET_ACCESS_KEY) ) && (!(strlen(getenv('AWS_SECRET_ACCESS_KEY'))==0)))
+{ $AWS_SECRET_ACCESS_KEY=getenv('AWS_SECRET_ACCESS_KEY'); }
 
 // parse options (vol-ids, older-than)
 
@@ -76,7 +81,7 @@ $ec2Config = array ('ServiceURL' => $ServiceURL);
 //$service = new Amazon_EC2_Client(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY);
 
 // with support for a different zone than US we do the following:
-$service = new Amazon_EC2_Client(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, $ec2Config);
+$service = new Amazon_EC2_Client($AWS_ACCESS_KEY_ID, $AWS_SECRET_ACCESS_KEY, $ec2Config);
 
 // Modify for Europe
 // $ec2Config = array ('ServiceURL' => 'https://eu-west-1.ec2.amazonaws.com');
@@ -86,7 +91,18 @@ $service = new Amazon_EC2_Client(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, $ec2C
 
 // get all volumes
 $request_v = new Amazon_EC2_Model_DescribeVolumesRequest();
-$response_v = $service->describeVolumes($request);
+
+
+
+try {
+	$response_v = $service->describeVolumes($request);
+} catch (Amazon_EC2_Exception $e) { 
+	echo 'Error: ' .$e->getMessage()."\n";
+  die ("\nExiting application\n\n");
+	
+}
+
+
 $result_v = $response_v->getDescribeVolumesResult();
 $volumes_found = $result_v->getVolume();
 
