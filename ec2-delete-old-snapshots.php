@@ -16,8 +16,8 @@
 
 // Your EC2 credentials
 
-define('AWS_ACCESS_KEY_ID', 'AKIAIMQDJK3HJA6I4VYA');
-define('AWS_SECRET_ACCESS_KEY', 'Um5L7z8l5N/EqsmV1c2eVp8/ekWFyPyh5SyYwM7w'); 
+define('AWS_ACCESS_KEY_ID', ''); 
+define('AWS_SECRET_ACCESS_KEY', '');
 define ('SYNTAX','Usage: php ec2-delete-old-snapshots.php -v vol-id [-v vol-id ...] -o days [--region region] [--noop]\n\n');
 define("NOOP", "1"); 
 
