@@ -1,0 +1,24 @@
+ec2-manage-snapshots
+by Erik Dasque, 2010
+
+Based on code from Oren Solomianik’s ec2-delete-old-snapshots ec2-manage-snapshots does things a little differently.
+
+Oren’s script would delete any snapshots older than n days for (a) given volume(s). I improved the code a little bit so as to handle a –region parameter ( –region eu-west-1 is an example) an –noop so as to tell us what it would do but not actually do it. That’s the ec2-delete-old-snapshots you’ll find in the included archive.
+
+Because I wanted to manage snapshots differently I heavily modified the original script to create ec2-manage-snapshots so that for a given volumes, it would keep snapshots made:
+
+* in the last 7 days
+* the past 4 sundays
+* every first day of the month
+* and erase the rest.
+
+Its behavior can be easily modified but I wanted to make sure I kept monthly snapshots, last 4 weekly & last 7 days worth. It assumes you’re doing one daily snapshot of each volume.
+
+Download here: http://github.com/edasque/ec2-manage-snapshots
+
+* Failsafe *
+Like its ancestor, the program checks to see that each vol-id entered on the command line has at least one newer snapshot than the deletion date, to prevent deletion of all snapshots of a certain volume. The deletion process will commence for a volume only if such a snapshot was found. More importantly, you can use the --noop command line option or the constant in the code (NOOP) and the script will tell you what it would have deleted but won’t actually delete anything.
+
+* Disclaimer *
+
+ This program is in development. Although it has been tested and worked on production environments, it can’t be guaranteed to perform without unexpected results. Use at your own risk.
