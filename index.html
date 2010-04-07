@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>edasque/ec2-manage-snapshots @ GitHub</title>
+	
+	<style type="text/css">
+		body {
+  		margin-top: 1.0em;
+  		background-color: #336699;
+		  font-family: "Helvetica,Arial,FreeSans";
+  		color: #ffffff;
+    }
+    #container {
+      margin: 0 auto;
+      width: 700px;
+    }
+		h1 { font-size: 3.8em; color: #cc9966; margin-bottom: 3px; }
+		h1 .small { font-size: 0.4em; }
+		h1 a { text-decoration: none }
+		h2 { font-size: 1.5em; color: #cc9966; }
+    h3 { text-align: center; color: #cc9966; }
+    a { color: #cc9966; }
+    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    .download { float: right; }
+		pre { background: #000; color: #fff; padding: 15px;}
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .footer { text-align:center; padding-top:30px; font-style: italic; }
+	</style>
+	
+</head>
+
+<body>
+  <a href="http://github.com/edasque/ec2-manage-snapshots"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+
+  <div id="container">
+
+    <div class="download">
+      <a href="http://github.com/edasque/ec2-manage-snapshots/zipball/master">
+        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
+      <a href="http://github.com/edasque/ec2-manage-snapshots/tarball/master">
+        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+    </div>
+
+    <h1><a href="http://github.com/edasque/ec2-manage-snapshots">ec2-manage-snapshots</a>
+      <span class="small">by <a href="http://github.com/edasque">edasque</a></span></h1>
+
+    <div class="description">
+      Manage your AWS EC2 snapshots
+    </div>
+
+    <p>Based on code from Oren Solomianik’s ec2-delete-old-snapshots ec2-manage-snapshots does things a little differently.
+
+Oren’s script would delete any snapshots older than n days for (a) given volume(s). I improved the code a little bit so as to handle a –region parameter ( –region eu-west-1 is an example) an –noop so as to tell us what it would do but not actually do it. That’s the ec2-delete-old-snapshots you’ll find in the included archive.
+
+Like its ancestor, the program checks to see that each vol-id entered on the command line has at least one newer snapshot than the deletion date, to prevent deletion of all snapshots of a certain volume. The deletion process will commence for a volume only if such a snapshot was found. More importantly, you can use the --noop command line option or the constant in the code (NOOP) and the script will tell you what it would have deleted but won’t actually delete anything.
+
+
+
+Because I wanted to manage snapshots differently I heavily modified the original script to create ec2-manage-snapshots so that for a given volumes, it would keep snapshots made:
+
+in the last 7 days
+the past 4 sundays
+every first day of the month
+and erase the rest.
+
+Its behavior can be easily modified but I wanted to make sure I kept monthly snapshots, last 4 weekly & last 7 days worth. It assumes you’re doing one daily snapshot of each volume.</p><h2>Install</h2>
+<p>Disclaimer: This program is in development. Although it has been tested and worked on production environments, it can’t be guaranteed to perform without unexpected results. Use at your own risk.
+</p>
+<h2>License</h2>
+<p>will be Apache Licensed, until then free for all.</p>
+<h2>Authors</h2>
+<p>Erik Dasque (erik@frenchguys.com)<br/><br/>      </p>
+<h2>Contact</h2>
+<p> (ca_github@frenchguys.com)<br/>      </p>
+
+
+    <h2>Download</h2>
+    <p>
+      You can download this project in either
+      <a href="http://github.com/edasque/ec2-manage-snapshots/zipball/master">zip</a> or
+      <a href="http://github.com/edasque/ec2-manage-snapshots/tarball/master">tar</a> formats.
+    </p>
+    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
+      by running:
+      <pre>$ git clone git://github.com/edasque/ec2-manage-snapshots</pre>
+    </p>
+
+    <div class="footer">
+      get the source code on GitHub : <a href="http://github.com/edasque/ec2-manage-snapshots">edasque/ec2-manage-snapshots</a>
+    </div>
+
+  </div>
+
+  
+</body>
+</html>
