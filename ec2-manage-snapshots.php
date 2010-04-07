@@ -92,15 +92,11 @@ $service = new Amazon_EC2_Client($AWS_ACCESS_KEY_ID, $AWS_SECRET_ACCESS_KEY, $ec
 // get all volumes
 $request_v = new Amazon_EC2_Model_DescribeVolumesRequest();
 
-
-
-try {
-	$response_v = $service->describeVolumes($request);
-} catch (Amazon_EC2_Exception $e) { 
+try { $response_v = $service->describeVolumes($request_v);
+		} catch (Amazon_EC2_Exception $e) { 
 	echo 'Error: ' .$e->getMessage()."\n";
-  die ("\nExiting application\n\n");
-	
-}
+  	die ("\nExiting application\n\n");
+	}
 
 
 $result_v = $response_v->getDescribeVolumesResult();

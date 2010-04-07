@@ -1,10 +1,11 @@
 <?php
 /**
  * 
+ * This is just file I use to experiment on stuff. You can safely ignore,
  *
  * @author Erik Dasque
- * @version $Id$
- * @copyright __MyCompanyName__, 7 March, 2010
+ * @version 0.01
+ * @copyright Vivaki, 7 March, 2010
  * @package default
  **/
 date_default_timezone_set('UTC');

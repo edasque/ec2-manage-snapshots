@@ -3,7 +3,7 @@
  * Modified from code by:
  * Oren Solomianik’s
  * http://orensol.com/2009/02/12/how-to-delete-those-old-ec2-ebs-snapshots/
- * New region and no-op code from
+ * New region. ENV vars and no-op code from
  * @author Erik Dasque
  * @version 0.7
  * @copyright Erik Dasque, 3 March, 2010
@@ -15,14 +15,25 @@
  **/
 
 // Your EC2 credentials
+$AWS_ACCESS_KEY_ID = '';
+$AWS_SECRET_ACCESS_KEY='';
 
-define('AWS_ACCESS_KEY_ID', ''); 
-define('AWS_SECRET_ACCESS_KEY', '');
 define ('SYNTAX','Usage: php ec2-delete-old-snapshots.php -v vol-id [-v vol-id ...] -o days [--region region] [--noop]\n\n');
-define("NOOP", "1"); 
+
+
+// uncomment the next line and comment the one after so the application is always in NO-OP mode (no delete)
+//define("NOOP", "1");
+define("NOOP", "0");
 
 
 date_default_timezone_set('UTC');
+
+if ((empty($AWS_ACCESS_KEY_ID) ) && (!(strlen(getenv('AWS_ACCESS_KEY_ID'))==0)))
+{ $AWS_ACCESS_KEY_ID=getenv('AWS_ACCESS_KEY_ID'); }
+
+if ((empty($AWS_SECRET_ACCESS_KEY) ) && (!(strlen(getenv('AWS_SECRET_ACCESS_KEY'))==0)))
+{ $AWS_SECRET_ACCESS_KEY=getenv('AWS_SECRET_ACCESS_KEY'); }
+
 
 // parse options (vol-ids, older-than)
 
@@ -84,7 +95,7 @@ $ec2Config = array ('ServiceURL' => $ServiceURL);
 //$service = new Amazon_EC2_Client(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY);
 
 // with support for a different zone than US we do the following:
-$service = new Amazon_EC2_Client(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, $ec2Config);
+$service = new Amazon_EC2_Client($AWS_ACCESS_KEY_ID, $AWS_SECRET_ACCESS_KEY, $ec2Config);
 
 // Modify for Europe
 // $ec2Config = array ('ServiceURL' => 'https://eu-west-1.ec2.amazonaws.com');
@@ -94,7 +105,15 @@ $service = new Amazon_EC2_Client(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, $ec2C
 
 // get all volumes
 $request_v = new Amazon_EC2_Model_DescribeVolumesRequest();
-$response_v = $service->describeVolumes($request);
+
+try {
+	$response_v = $service->describeVolumes($request);
+} catch (Amazon_EC2_Exception $e) { 
+	echo 'Error: ' .$e->getMessage()."\n";
+  die ("\nExiting application\n\n");
+	
+}
+
 $result_v = $response_v->getDescribeVolumesResult();
 $volumes_found = $result_v->getVolume();
 
